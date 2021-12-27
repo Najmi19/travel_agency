@@ -1,4 +1,4 @@
 package fr.lernejo.travelsite;
 
-public record registration_travel(String userEmail,String userName,String userCountry,String weatherExpectation,int minimumTemperatureDistance) {
+public record registration_travel(String userName,String userEmail,String userCountry,String weatherExpectation,int minimumTemperatureDistance) {
 }

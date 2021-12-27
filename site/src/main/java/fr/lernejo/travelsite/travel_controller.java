@@ -1,38 +1,31 @@
 package fr.lernejo.travelsite;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
 @RestController
 public class travel_controller {
-    private final ArrayList<travel> listA = new ArrayList<>();
+    private final ArrayList<Country> listA = new ArrayList<>();
     private final ArrayList<registration_travel> listB = new ArrayList<>();
 
     @GetMapping("/api/travels")
-    public ArrayList<travel> getListA() {
-        listA.add(new travel("Caribbean",
-            32.4));
-        listA.add(new travel("Australia",
-            35.1));
-        return listA;
+    public ArrayList<Country> getListA(@RequestParam String userName) {
+        ArrayList<Country> countries = new ArrayList<>();
+        countries.add(new Country("Caribbean", 32.4));
+        countries.add(new Country("Australia", 35.1));
+        for (registration_travel registration : listB) {
+            if (registration.userName().equals(userName)) {
+                return countries;
+            }
+        }
+            return new ArrayList<Country>();
+        }
+
+        @PostMapping("api/inscription")
+        public void add (@RequestBody registration_travel registration){
+            this.listB.add(registration);
+        }
     }
 
-    @PostMapping("api/travels")
-    public void add (@RequestBody travel Travel){
-        this.listA.add(Travel);
-    }
-
-    @GetMapping("/api/inscription")
-    public ArrayList<registration_travel> getListB() {
-        return listB;
-    }
-
-    @PostMapping("api/inscription")
-    public void add (@RequestBody registration_travel registration){
-        this.listB.add(registration);
-    }
-}
