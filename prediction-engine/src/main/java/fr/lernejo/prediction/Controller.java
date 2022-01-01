@@ -20,7 +20,7 @@ public class Controller implements Actuality {
         System.out.println("the Date and the temperature");
     }
 
-@GetMapping("/api/temperature")
+@GetMapping("/api/temperature?country={country}")
     public Overall getList_C(){
             Controller Act = new Controller();
             Act.actuality();
