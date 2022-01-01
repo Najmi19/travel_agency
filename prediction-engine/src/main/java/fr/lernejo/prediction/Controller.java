@@ -1,7 +1,7 @@
 package fr.lernejo.prediction;
 
-import com.sun.nio.sctp.SctpSocketOption;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -20,25 +20,26 @@ public class Controller implements Actuality {
         System.out.println("the Date and the temperature");
     }
 
-@GetMapping("/api/temperature?country={country}")
-    public Overall getList_C(){
-            Controller Act = new Controller();
-            Act.actuality();
-            getList_T();
-            getList_TT();
-            Overall overall = new Overall("France",List_T);
+@GetMapping("/api/temperature")
+    public Overall getList_C(@RequestParam String country){
+            this.actuality();
+            ArrayList<List_temperatures>list_w = new ArrayList<>();
+            list_w = getList_T(country,list_w);
+            list_w =getList_TT(country,list_w);
+            Overall overall = new Overall(country,list_w);
             return overall;
 }
-    public void getList_T(){
+    public ArrayList<List_temperatures> getList_T(String country, ArrayList<List_temperatures>list_w){
         TemperatureService tempSrv = new TemperatureService();
         LocalDate localDate = LocalDate.now();
-        List_T.add(new List_temperatures(tempSrv.getTemperature("France"), localDate));
+        list_w.add(new List_temperatures(tempSrv.getTemperature(country), localDate));
+        return list_w;
     }
-    public void getList_TT(){
+    public ArrayList<List_temperatures> getList_TT(String country, ArrayList<List_temperatures>list_w){
         TemperatureService tempSrv = new TemperatureService();
         LocalDate localDateToday = LocalDate.now();
         LocalDate localDateYesterday = localDateToday.minusDays(1);
-        List_T.add(new List_temperatures(tempSrv.getTemperature("France"), localDateYesterday));
-
+        list_w.add(new List_temperatures(tempSrv.getTemperature(country), localDateYesterday));
+        return list_w;
     }
 }
