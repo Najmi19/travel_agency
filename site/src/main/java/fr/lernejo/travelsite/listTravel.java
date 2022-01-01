@@ -2,9 +2,9 @@ package fr.lernejo.travelsite;
 
 import org.springframework.boot.SpringApplication;
 
-public class list_travel {
+public class listTravel {
     public static void main(String[] args) {
-        SpringApplication.run(list_travel.class, args);
+        SpringApplication.run(listTravel.class, args);
     }
 }
 
