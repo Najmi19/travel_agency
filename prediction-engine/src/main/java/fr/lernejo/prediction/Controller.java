@@ -25,6 +25,7 @@ public class Controller implements Actuality {
             Controller Act = new Controller();
             Act.actuality();
             getList_T();
+            getList_TT();
             Overall overall = new Overall("France",List_T);
             return overall;
 }
@@ -33,5 +34,11 @@ public class Controller implements Actuality {
         LocalDate localDate = LocalDate.now();
         List_T.add(new List_temperatures(tempSrv.getTemperature("France"), localDate));
     }
+    public void getList_TT(){
+        TemperatureService tempSrv = new TemperatureService();
+        LocalDate localDateToday = LocalDate.now();
+        LocalDate localDateYesterday = localDateToday.minusDays(1);
+        List_T.add(new List_temperatures(tempSrv.getTemperature("France"), localDateYesterday));
 
+    }
 }
