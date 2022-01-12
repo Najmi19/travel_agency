@@ -42,4 +42,5 @@ public class Controller implements Actuality {
         list_w.add(new List_temperatures(tempSrv.getTemperature(country), localDateYesterday));
         return list_w;
     }
+
 }
