@@ -1,7 +1,5 @@
 package fr.lernejo.travelsite;
-
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 
 @RestController
@@ -21,7 +19,6 @@ public class travelController {
         }
             return new ArrayList<country>();
         }
-
         @PostMapping("api/inscription")
         public void add (@RequestBody registrationTravel registration){
             this.listB.add(registration);

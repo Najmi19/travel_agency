@@ -17,7 +17,6 @@ public class Launcher {
         Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://localhost:7080/")
             .build();
-
         return retrofit.create(PredictionEngineClient.class);
     }
 }
