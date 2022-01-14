@@ -11,7 +11,6 @@ public class Launcher {
     public static void main(String[] args) {
         SpringApplication.run(Launcher.class, args);
     }
-
     @Bean
     PredictionEngineClient predictionEngineClient() {
         Retrofit retrofit = new Retrofit.Builder()
